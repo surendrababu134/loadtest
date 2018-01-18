@@ -1,0 +1,96 @@
+<br/>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3 text-center">
+        <h3>Load Test</h3>
+    </div>
+</div>
+<form ng-submit="testingMethod(urlDetails)" name="testsubmit">
+    <div class="row">
+        <div class="col-sm-2 col-sm-offset-3">
+            <select class="form-control" ng-model="urlDetails.httpRequest">
+                <option value="">Select</option>
+                <option value="http://">http://</option>
+                <option value="https://">https://</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="url" ng-model="urlDetails.url" placeholder="URL">
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <select class="form-control" ng-model="urlDetails.urlmethod">
+                <option value="">Select</option>
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+            </select>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-2 col-sm-offset-3">
+            <label>No.of Requests</label>
+        </div>
+        <div class="col-sm-4">
+            <select class="form-control" ng-model="urlDetails.requestCount">
+                <option value="">Select</option>
+                <option value="1000">1k</option>
+                <option value="2000">2k</option>
+                <option value="3000">3k</option>
+                <option value="4000">4k</option>
+                <option value="5000">5k</option>
+                <option value="6000">6k</option>
+                <option value="7000">7k</option>
+                <option value="8000">8k</option>
+                <option value="9000">9k</option>
+                <option value="10000">10k</option>
+                <option value="20000">20k</option>
+                <option value="30000">30k</option>
+                <option value="40000">40k</option>
+                <option value="50000">50k</option>
+                <option value="60000">60k</option>
+                <option value="70000">70k</option>
+                <option value="80000">80k</option>
+                <option value="90000">90k</option>
+                <option value="100000">100k</option>
+            </select>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <button type="submit" class="form-control btn btn-sm btn-success">Test</button>
+        </div>
+    </div>
+</form>
+<br/>
+<br/>
+<div class="row" ng-show="requestTable">
+    <div class="col-sm-6 col-sm-offset-3">
+        <hr/>
+        <h3>Time taken for every 1000 requests</h3>
+        <table class="table table-hover table-striped table-condensed">
+            <tr>
+                <th>No.of requests</th>
+                <th>Time Lapsed(in Seconds)</th>
+            </tr>
+            <tr ng-repeat="reqValue in requestList.requestValue" ng-if="requestList.isResolved">
+                <td>{{reqValue.request}}</td>
+                <td>{{reqValue.timeTaken}}</td>
+            </tr>
+            <tr>
+
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row" ng-if="requestList.isResolved">
+<div class="col-sm-6 col-sm-offset-3">
+  <label>Time Taken(in Seconds):{{requestList.averageTime}}</label>
+</div>
+</div>
+<div class="spinner" ng-if="!requestList.isResolved && requestTable">
+                    <div class="cube1"></div>
+                    <div class="cube2"></div>
+                </div>
